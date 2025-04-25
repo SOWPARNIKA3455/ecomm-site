@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Products.css';
+import './products.css';
 
 const API = "https://ecomm-site-server.onrender.com";
 
