@@ -4,18 +4,23 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
-const Product = require('./product');
-const User = require('./user');
+const Product = require('./model/product.jsx');
+const User = require('./model/user.jsx');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; // Use environment port if provided
+
 const secret_key = process.env.JWT_SECRET_KEY;
 
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://sowparnikasatheesh277:ssss45%40er@cluster0.mandpix.mongodb.net/productdb')
+// MongoDB connection
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => console.log('DB connected'))
-  .catch(err => console.log(err));
+  .catch(err => console.log('MongoDB connection error: ', err));
 
 // JWT Authentication Middleware
 const authenticateToken = (req, res, next) => {
@@ -38,7 +43,9 @@ app.get('/', (req, res) => {
 app.post('/user', async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    if (!email || !password || !name) return res.status(400).json({ error: "Missing fields" });
+    if (!email || !password || !name) {
+      return res.status(400).json({ error: "Missing fields" });
+    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -54,7 +61,7 @@ app.post('/user', async (req, res) => {
 
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
@@ -62,7 +69,9 @@ app.post('/user', async (req, res) => {
 app.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) return res.status(400).json({ error: "Missing login details" });
+    if (!email || !password) {
+      return res.status(400).json({ error: "Missing login details" });
+    }
 
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ message: "User not found" });
@@ -70,26 +79,28 @@ app.post('/login', async (req, res) => {
     const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) return res.status(401).json({ message: "Incorrect email or password" });
 
-    const token = jwt.sign({ email: user.email }, secret_key);
+    const token = jwt.sign({ email: user.email }, secret_key, { expiresIn: '1h' }); // Set an expiration time for the token
     res.status(200).json({ message: 'Login Successful', token });
 
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
 // 📦 Create a Product (Protected)
 app.post('/products', authenticateToken, async (req, res) => {
   try {
-    if (!req.body) return res.status(400).json({ error: "Product details required" });
+    if (!req.body || !req.body.name || !req.body.price) {
+      return res.status(400).json({ error: "Product details are required" });
+    }
 
     const product = new Product(req.body);
     await product.save();
     res.status(201).json(product);
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
@@ -100,7 +111,7 @@ app.get('/products', async (req, res) => {
     res.status(200).json(products);
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
@@ -108,14 +119,16 @@ app.get('/products', async (req, res) => {
 app.get('/products/count/:price', async (req, res) => {
   try {
     const price = Number(req.params.price);
+    if (isNaN(price)) return res.status(400).json({ error: "Invalid price parameter" });
+
     const productCount = await Product.aggregate([
       { $match: { price: { $gt: price } } },
       { $count: "productCount" }
     ]);
-    res.status(200).send(productCount);
+    res.status(200).json(productCount);
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
@@ -131,7 +144,7 @@ app.get('/products/:id', async (req, res) => {
     res.status(200).json(product);
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
@@ -142,10 +155,12 @@ app.patch('/products/:id', async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ error: "Invalid ID" });
 
     const product = await Product.findByIdAndUpdate(id, req.body, { new: true });
+    if (!product) return res.status(404).json({ error: "Product not found" });
+
     res.status(200).json(product);
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
@@ -161,7 +176,7 @@ app.delete('/products/:id', async (req, res) => {
     res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
