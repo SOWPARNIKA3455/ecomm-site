@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Products.css';
 
-const API = import.meta.env.VITE_API_URL;
+const API = "https://ecomm-site-server.onrender.com";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
