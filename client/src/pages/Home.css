@@ -1,0 +1,227 @@
+
+  /* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  /* Product Page */
+.home {
+    min-height: 100vh;
+    width: 100vw; /* Full width of the screen */
+    background: url('https://discover.certilogo.com/cdn/shop/articles/digital_fashion_0.jpg?v=1678805380');
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  /* Header */
+  .header {
+    background-color: #333;
+    padding: 1rem 2rem;
+  }
+  
+  .navbar-container {
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 100%;
+
+  }
+  
+  .navbar-logo {
+    color: #fff;
+    font-size: 1.8rem;
+    text-decoration: none;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .navbar-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+  }
+  
+  .navbar-link:hover {
+    color: #ff6a00;
+  }
+  
+  /* Hero Section */
+  .hero {
+    background: url('https://via.placeholder.com/1920x600') no-repeat center center;
+    background-size: cover;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .hero-content {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 8px;
+  }
+  
+  .home-heading {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .home-description {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .home-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .home-btn {
+    padding: 12px 24px;
+    background-color: #ff6a00;
+    color: white;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .home-btn:hover {
+    background-color: #e65c00;
+  }
+ .about-section{
+    background:url('https://www.shutterstock.com/image-illustration/clothes-on-sand-dune-background-600nw-2490651895.jpg');
+ }
+  
+  .about-section p {
+    
+    color: #f4f7f4;
+  }
+  .about-section h2{
+    
+    color: #f6f3f3;
+text-align: center;
+  }
+  
+  
+  /* Featured Products Section */
+  .featured-products2 {
+    padding: 3rem 2rem;
+    background-color: #fff;
+    text-align: center;
+  }
+  
+  .section-heading {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .product-cards1 {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .product-card2 {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    text-align: center;
+  }
+  
+  .product-card2 img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .product-card2 h3 {
+    margin-top: 1rem;
+  }
+  
+  .product-card2 p {
+    color: #666;
+    margin: 0.5rem 0;
+  }
+  
+  .product-card strong {
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .btn-view {
+    padding: 10px 20px;
+    background-color: #ff6a00;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-view:hover {
+    background-color: #e65c00;
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: #333;
+    padding: 1rem;
+    color: white;
+    text-align: center;
+  }
+  
+  .footer-links {
+    margin-top: 1rem;
+  }
+  
+  .footer-link {
+    color: #fff;
+    margin: 0 1rem;
+    text-decoration: none;
+  }
+  
+  .footer-link:hover {
+    color: #ff6a00;
+  }
+  
+  
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  .social-icon-img {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease;
+  }
+  
+  .social-icon-img:hover {
+    transform: scale(1.2);
+  }
+  
+  
+  

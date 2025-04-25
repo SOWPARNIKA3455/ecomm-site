@@ -1,0 +1,59 @@
+.about {
+    min-height: 100vh;
+    width: 100vw; /* Full width of the screen */
+    background: url('https://t4.ftcdn.net/jpg/05/96/62/65/360_F_596626503_jrzjZNYStDexiWxQFqO7oCh6M8PdMlJs.jpg');
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+
+.about-page {
+    padding: 2rem;
+    max-width: 900px;
+    margin: auto;
+    color: #a88484;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .about-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .about-header h1 {
+    font-size: 3rem;
+    color: #92bbe3;
+  }
+  
+  .about-header p {
+    font-size: 1.2rem;
+    color: #9dcf60;
+  }
+  
+  .about-content .about-section {
+    margin-bottom: 2rem;
+  }
+  
+  .about-section h2 {
+    font-size: 2rem;
+    color: #bed7ef;
+    margin-bottom: 0.5rem;
+  }
+  
+  .about-section p,
+  .about-section ul {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #b8eaee;
+  }
+  
+  .about-section ul {
+    padding-left: 1.2rem;
+    list-style: disc;
+  }
+  
